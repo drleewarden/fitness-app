@@ -1,7 +1,7 @@
 /* /pages/index.js */
 
 import RestaurantList from "../components/RestaurantList";
-import React from "react";
+import React, {Fragment} from "react";
 import defaultPage from "../hocs/defaultPage";
 import {
   Alert,
