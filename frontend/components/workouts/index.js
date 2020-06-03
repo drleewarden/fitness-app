@@ -13,24 +13,24 @@ import {
 } from "reactstrap";
 import { CardText, CardTitle, Col, Row } from "reactstrap";
 
-const RestaurantList = (
-  { data: { loading, error, restaurants }, search },
-  req
+const WorkoutList = (
+  { data: { exercises, error } }
 ) => {
-  console.log('res',restaurants)
+  console.log('workouts',exercises)
  
   if (error) return "Error loading restaurants";
   //if restaurants are returned from the GraphQL query, run the filter query
   //and set equal to variable restaurantSearch
 
-  if (restaurants && restaurants.length) {
+  if (exercises && exercises.length) {
     //searchQuery
-    const searchQuery = restaurants.filter(query =>
-      query.name.toLowerCase().includes(search)
+    const searchQuery = exercises.filter(query =>
+      query.title
     );
     if (searchQuery.length != 0) {
       
       return (
+        
         <div>
           
           <div className="h-100">
@@ -48,7 +48,7 @@ const RestaurantList = (
                 />
                 <CardBody>
                   {/* <Title>dsfadfd</Title> */}
-                  <CardTitle>{res.name}</CardTitle>
+                  <CardTitle>{res.title}</CardTitle>
                   <CardText>{res.description}</CardText>
                 </CardBody>
                 <div className="card-footer">
@@ -91,25 +91,23 @@ const RestaurantList = (
 
 const query = gql`
   {
-    restaurants {
-      id
-      name
-      description
-      image {
-        url
-      }
+    exercises {
+      title
     }
   }
 `;
-RestaurantList.getInitialProps = async ({ req }) => {
-  const res = await fetch("https://api.github.com/repos/zeit/next.js");
-  const json = await res.json();
-  return { stars: json.stargazers_count };
-};
+
+// RestaurantList.getInitialProps = async ({ req }) => {
+//   const res = await fetch("https://api.github.com/repos/zeit/next.js");
+//   const json = await res.json();
+//   return { stars: json.stargazers_count };
+// };
+
 // The `graphql` wrapper executes a GraphQL query and makes the results
 // available on the `data` prop of the wrapped component (RestaurantList)
+
 export default graphql(query, {
   props: ({ data }) => ({
     data
   })
-})(RestaurantList);
+})(WorkoutList);

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { unsetToken } from "../lib/auth";
 import { Container, Nav, NavItem } from "reactstrap";
 import Btn from "../components/Btn"
-import Stopwatch from "./StopWatch"
+// import Workouts from "./workouts/index"
 import defaultPage from "../hocs/defaultPage";
 import Cookie from "js-cookie";
 
@@ -71,6 +71,11 @@ class Layout extends React.Component {
                     <a className="nav-link">Sign In</a>
                   </Link>
                 </NavItem>
+                <NavItem className="ml-auto">
+                  <Link href="/workouts">
+                    <a className="nav-link">Workouts</a>
+                  </Link>
+                </NavItem>
 
                 <NavItem>
                   <Link href="/signup">
@@ -85,7 +90,7 @@ class Layout extends React.Component {
            <button onClick={() => setCount(count + 1)}>
               Click me
             </button> */}
-            <Stopwatch/>
+            {/* <Workouts /> */}
         <Container>{children}</Container>
         {/* <footer className="footer">
           {"Strapi footer"}
