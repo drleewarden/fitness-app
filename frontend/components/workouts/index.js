@@ -34,27 +34,27 @@ const WorkoutList = (
         <div>
           
           <div className="h-100">
-            {searchQuery.map(res => (
+            {searchQuery.map(exercise => (
          
               <Card
                 style={{ width: "30%", margin: "0 10px" }}
                 className="h-100"
-                key={res.id}
+                key={exercise.uid}
               >
                 <CardImg
                   top={true}
                   style={{ height: 250 }}
-                  src={`http://localhost:1337${res.image.url}`}
+                  src={`http://localhost:1337${exercise.image[0].url}`}
                 />
                 <CardBody>
                   {/* <Title>dsfadfd</Title> */}
-                  <CardTitle>{res.title}</CardTitle>
-                  <CardText>{res.description}</CardText>
+                  <CardTitle>{exercise.title}</CardTitle>
+                  <CardText>{exercise.description}</CardText>
                 </CardBody>
                 <div className="card-footer">
                   <Link
-                    as={`/restaurants/${res.id}`}
-                    href={`/restaurants?id=${res.id}`}
+                    as={`/restaurants/${exercise.uid}`}
+                    href={`/restaurants?id=${exercise.uid}`}
                   >
                     <a className="btn btn-primary">View</a>
                   </Link>
@@ -92,7 +92,12 @@ const WorkoutList = (
 const query = gql`
   {
     exercises {
+      uid
       title
+      description
+      image {
+        url
+      }
     }
   }
 `;
