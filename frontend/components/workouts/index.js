@@ -3,13 +3,32 @@ import gql from "graphql-tag";
 import Link from "next/link";
 import {Exercise} from "./card";
 import { graphql } from "react-apollo";
+import React, {useContext, Fragment, useState, createContext} from "react";
+import { store } from '../store';
 
+const shuffle =(a)=> {
+  for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 const WorkoutList = (
   { data: { exercises, error } }
 ) => {
-  console.log('workouts',exercises)
- 
+const [exerciseList, setExerciseList] = useState({});
+      // setExerciseList(searchQuery)
+      // const newContext = React.createContext({workoutList :searchQuery  });
+      // const value = useContext(newContext);
+      // console.log('val',value); 
+const globalState = useContext(store);
+// dispatch state to store
+const { dispatch } = globalState;
+dispatch({ type: 'ACTIVE_WORKOUT',
+list: {test:1234} })
+
+
   if (error) return "Error loading restaurants";
   //if restaurants are returned from the GraphQL query, run the filter query
   //and set equal to variable restaurantSearch
@@ -20,15 +39,19 @@ const WorkoutList = (
       query.title
     );
     if (searchQuery.length != 0) {
-      
+ 
+
+      // this will return { color: 'black' }
       return (
         
         <div>
           
-          <div className="h-100">
+          <div className="container mx-auto">
             {searchQuery.map(exercise => (
-         
-              <Exercise exercise={exercise} key={exercise.uid} />
+         <Fragment>
+           <Exercise exercise={exercise} key={exercise.uid} />
+         </Fragment>
+              
             ))}
           </div>
 

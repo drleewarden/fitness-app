@@ -3,6 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { unsetToken } from "../lib/auth";
 import { Container, Nav, NavItem } from "reactstrap";
+import { StateProvider } from './store.js';
+
 import Btn from "../components/Btn"
 // import Workouts from "./workouts/index"
 import defaultPage from "../hocs/defaultPage";
@@ -91,7 +93,10 @@ class Layout extends React.Component {
               Click me
             </button> */}
             {/* <Workouts /> */}
-        <Container>{children}</Container>
+            <StateProvider>
+              <Container>{children}</Container>
+            </StateProvider>
+        
         {/* <footer className="footer">
           {"Strapi footer"}
           <style jsx>

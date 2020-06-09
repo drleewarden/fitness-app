@@ -21,8 +21,8 @@ export const Exercise =(props)=> {
   return (
     <Fragment>
       <Card
-                style={{ width: "30%", margin: "0 10px" }}
-                className="h-100"
+                style={{ margin: "0 0px 20px", border: 0}}
+                className="h-100 col-sm-12 col-md-6 col-lg-4"
                 key={exercise.uid}
               >
                 <CardImg
@@ -31,19 +31,21 @@ export const Exercise =(props)=> {
                   src={`http://localhost:1337${exercise.image[0].url}`}
                 />
 
-                <CardBody>
+                <CardBody style={{border: '1px solid grey'}}>
                   {/* <Title>dsfadfd</Title> */}
                   <CardTitle>{exercise.title}</CardTitle>
                   <CardText>{exercise.description}</CardText>
-                </CardBody>
-                <div className="card-footer">
                   <Link
+                  style={{margin:'auto'}}
                     as={`/restaurants/${exercise.uid}`}
                     href={`/restaurants?id=${exercise.uid}`}
                   >
-                    <a className="btn btn-primary">View</a>
+                    <a className="btn btn-primary mx-auto w-100">View More</a>
                   </Link>
-                </div>
+                </CardBody>
+                {/* <div className="card-footer">
+                 
+                </div> */}
               </Card>
     </Fragment>
   )

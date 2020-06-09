@@ -1,11 +1,13 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useState} from "react";
 
 class Stopwatch extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       secondsElapsed:0
     }
+    
     this.activityState = "activity"
     this.text = "work out time, lets do this"
     this.start = this.start.bind(this)
