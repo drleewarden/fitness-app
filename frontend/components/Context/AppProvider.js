@@ -2,8 +2,9 @@
 
 import React from "react";
 import Cookies from "js-cookie";
+import {GetWorkout} from "../workouts/workout_list"
 /* First we will make a new context */
-const AppContext = React.createContext();
+export const AppContext = React.createContext();
 
 /* Then create a provider Component */
 class AppProvider extends React.Component {
@@ -11,10 +12,16 @@ class AppProvider extends React.Component {
     super(props);
     this.state = {
       items: [],
-      total: null
+      total: null,
+      exerciseList: []
     };
+    
+  }
+  getList =()=>{
+    return GetWorkout()
   }
   componentDidMount() {
+    
     const cart = Cookies.getJSON("cart");
     //if items in cart, set items and total from cookie
     console.log(cart);
@@ -26,7 +33,13 @@ class AppProvider extends React.Component {
       });
     }
   }
-
+  
+ 
+  updateState = (update)=>{
+   
+   this.setState(update);
+  //  return this.state.exerciseList
+  }
   addItem = item => {
     let { items } = this.state;
     //check for item already in cart
@@ -91,10 +104,12 @@ class AppProvider extends React.Component {
     return (
       <AppContext.Provider
         value={{
-          items: this.state.items,
-          addItem: this.addItem,
-          removeItem: this.removeItem,
-          total: this.state.total
+          ...this.state,
+          // items: this.state.items,
+          // addItem: this.addItem,
+          // removeItem: this.removeItem,
+          // total: this.state.total,
+           updateState:this.updateState
         }}
       >
         {this.props.children}

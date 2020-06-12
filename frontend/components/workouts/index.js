@@ -1,10 +1,11 @@
 /* components/RestaurantList/index.js */
+import React, {useContext, Fragment, useState, createContext} from "react";
 import gql from "graphql-tag";
 import Link from "next/link";
 import {Exercise} from "./card";
 import { graphql } from "react-apollo";
-import React, {useContext, Fragment, useState, createContext} from "react";
 import { store } from '../store';
+import {AppContext} from '../Context/AppProvider'
 
 const shuffle =(a)=> {
   for (let i = a.length - 1; i > 0; i--) {
@@ -25,9 +26,7 @@ const [exerciseList, setExerciseList] = useState({});
 const globalState = useContext(store);
 // dispatch state to store
 const { dispatch } = globalState;
-dispatch({ type: 'ACTIVE_WORKOUT',
-list: {test:1234} })
-
+  
 
   if (error) return "Error loading restaurants";
   //if restaurants are returned from the GraphQL query, run the filter query
@@ -39,40 +38,52 @@ list: {test:1234} })
       query.title
     );
     if (searchQuery.length != 0) {
- 
-
       // this will return { color: 'black' }
+      dispatch(
+        { type: 'ACTIVE_WORKOUT',
+          list: searchQuery
+        })
+    
       return (
-        
-        <div>
+        <AppContext.Consumer>{(context)=>{
+          const { getExerciseList } = context;
+          console.log('why',getExerciseList)
+          
+            return(
+              <div>
           
           <div className="container mx-auto">
             {searchQuery.map(exercise => (
-         <Fragment>
-           <Exercise exercise={exercise} key={exercise.uid} />
-         </Fragment>
-              
-            ))}
+                <Fragment>
+                  <Exercise exercise={exercise} key={exercise.uid} />
+                </Fragment>
+                      
+                    ))}
           </div>
 
-          <style jsx global>
-            {`
-              a {
-                color: white;
-              }
-              a:link {
-                text-decoration: none;
-                color: white;
-              }
-              a:hover {
-                color: white;
-              }
-              .card-columns {
-                column-count: 3;
-              }
-            `}
-          </style>
-        </div>
+              <style jsx global>
+                {`
+                  a {
+                    color: white;
+                  }
+                  a:link {
+                    text-decoration: none;
+                    color: white;
+                  }
+                  a:hover {
+                    color: white;
+                  }
+                  .card-columns {
+                    column-count: 3;
+                  }
+                `}
+              </style>
+            </div>
+            )
+          }}
+
+        </AppContext.Consumer>
+        
       );
     } else {
       return <h1>No Restaurants Found</h1>;

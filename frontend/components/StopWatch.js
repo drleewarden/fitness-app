@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from "react";
-
+import { store } from '../components/store';
 class Stopwatch extends React.Component {
   constructor(props) {
     super(props);
