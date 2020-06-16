@@ -1,19 +1,23 @@
 import React, {Fragment, useState} from "react";
 import { store } from '../components/store';
+import WorkoutList from '../components/workouts/'
 class Stopwatch extends React.Component {
   constructor(props) {
+
     super(props);
-    
     this.state = {
-      secondsElapsed:0
+      secondsElapsed:0,
     }
-    
     this.activityState = "activity"
     this.text = "work out time, lets do this"
     this.start = this.start.bind(this)
     this.stop = this.stop.bind(this)
     this.cluster= 0;
+    
   }
+  componentDidMount(){
+  }
+
 
   getSeconds() {
     return ('0' + this.state.secondsElapsed  % 60).slice(-2)
@@ -28,6 +32,7 @@ class Stopwatch extends React.Component {
     }
   }
   start() {
+    
     const that = this;
     this.incrementer = setInterval(function() {
       if(that.getSeconds() >= 40){
@@ -56,6 +61,7 @@ class Stopwatch extends React.Component {
         that.setState({secondsElapsed:(that.state.secondsElapsed + 1)})
         
       },1000)
+      
   }
 
   stop() {
@@ -77,7 +83,7 @@ render(){
         <button onClick={this.start}>Start Workout</button>
         <button onClick={this.stop}>Stop Workout</button>
       </section>
-      
+      <WorkoutList timer={this.getMinutes()} />
       <style jsx>
                         {`
                         h1{

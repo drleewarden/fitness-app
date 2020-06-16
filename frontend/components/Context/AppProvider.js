@@ -2,14 +2,30 @@
 
 import React from "react";
 import Cookies from "js-cookie";
-import {GetWorkout} from "../workouts/workout_list"
+import gql from "graphql-tag";
+// import {GetWorkout} from "../workouts/workout_list"
+import { useQuery } from '@apollo/react-hooks';
 /* First we will make a new context */
 export const AppContext = React.createContext();
+const LIST_WORKOUT = gql`
+{
+  exercises {
+    uid
+    title
+    description
+    image {
+      url
+    }
+  }
+}
+`;
 
 /* Then create a provider Component */
 class AppProvider extends React.Component {
+  
   constructor(props) {
     super(props);
+   
     this.state = {
       items: [],
       total: null,
@@ -18,10 +34,13 @@ class AppProvider extends React.Component {
     
   }
   getList =()=>{
-    return GetWorkout()
+    //const { loading, error, data } = useQuery(LIST_WORKOUT);
+    //console.log('shit on my face',data)
+    return 'GetWorkout()'
   }
   componentDidMount() {
-    
+    // const { loading, error, data } = useQuery(LIST_WORKOUT);
+    // console.log('dsf',data)
     const cart = Cookies.getJSON("cart");
     //if items in cart, set items and total from cookie
     console.log(cart);
@@ -101,6 +120,7 @@ class AppProvider extends React.Component {
     }
   };
   render() {
+    this.getList()
     return (
       <AppContext.Provider
         value={{

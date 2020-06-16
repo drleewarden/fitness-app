@@ -16,8 +16,10 @@ const shuffle =(a)=> {
 }
 
 const WorkoutList = (
-  { data: { exercises, error } }
+  { data: { exercises, error }}
 ) => {
+  console.log('props:',exercises)
+
 const [exerciseList, setExerciseList] = useState({});
       // setExerciseList(searchQuery)
       // const newContext = React.createContext({workoutList :searchQuery  });
@@ -26,7 +28,7 @@ const [exerciseList, setExerciseList] = useState({});
 const globalState = useContext(store);
 // dispatch state to store
 const { dispatch } = globalState;
-  
+
 
   if (error) return "Error loading restaurants";
   //if restaurants are returned from the GraphQL query, run the filter query

@@ -14,9 +14,6 @@ const StateProvider = ( { children } ) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch(action.type) {
       case 'ACTIVE_WORKOUT':
-        console.log('s',state)
-        console.log('a',action)
-        
         const newState = 'ACTIVE_WORKOUT'// do something with the action
       
         return newState;
