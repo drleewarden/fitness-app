@@ -88,34 +88,9 @@ class Layout extends React.Component {
             )}
           </Nav>
         </header>
-        {/* <p>You clicked {count} times</p>
-           <button onClick={() => setCount(count + 1)}>
-              Click me
-            </button> */}
-            {/* <Workouts /> */}
             <StateProvider>
-              <Container>{children}</Container>
+              {children}
             </StateProvider>
-        
-        {/* <footer className="footer">
-          {"Strapi footer"}
-          <style jsx>
-            {`
-              .footer {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                height: 60px;
-                line-height: 60px;
-                background-color: #f5f5f5;
-              }
-              a:hover {
-                cursor: pointer;
-                color: yellow;
-              }
-            `}
-          </style>
-        </footer> */}
       </div>
     );
   }

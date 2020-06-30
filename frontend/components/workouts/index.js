@@ -28,8 +28,6 @@ const [exerciseList, setExerciseList] = useState({});
 const globalState = useContext(store);
 // dispatch state to store
 const { dispatch } = globalState;
-
-
   if (error) return "Error loading restaurants";
   //if restaurants are returned from the GraphQL query, run the filter query
   //and set equal to variable restaurantSearch
@@ -43,14 +41,12 @@ const { dispatch } = globalState;
       // this will return { color: 'black' }
       dispatch(
         { type: 'ACTIVE_WORKOUT',
-          list: searchQuery
+          payload: searchQuery
         })
     
       return (
         <AppContext.Consumer>{(context)=>{
-          const { getExerciseList } = context;
-          console.log('why',getExerciseList)
-          
+          const { getExerciseList } = context;          
             return(
               <div>
           

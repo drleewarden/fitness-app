@@ -1,22 +1,32 @@
 // store.js
 import React, {createContext, useReducer, useState} from 'react';
 
-const initialState = {};
+const initialState = {
+  exercises:[]
+};
 const store = createContext(initialState);
 const { Provider } = store;
 
 const StateProvider = ( { children } ) => {
  
-  const [exerciseListX, setExerciseListX] = useState({});
-  const jump =()=>{
-    setExerciseListX({t:'dsf'})
-  }
+ const [exerciseListX, setExerciseListX] = useState({});
+  // const jump =()=>{
+  //   setExerciseListX({t:'dsf'})
+  // }
   const [state, dispatch] = useReducer((state, action) => {
     switch(action.type) {
       case 'ACTIVE_WORKOUT':
-        const newState = 'ACTIVE_WORKOUT'// do something with the action
+        
+        const {payload} = action       
+        if(state && state.exercises.length <= 0){
+          return {...state, exercises: payload}
+          
+        }
+        return
+        case 'ACTIVE_TIME':
+        const timer = 'asd'// do something with the action
       
-        return newState;
+        return timer;
       default:
         throw new Error();
     };
@@ -26,4 +36,4 @@ const StateProvider = ( { children } ) => {
 };
 
 export { store, StateProvider }
-console.log('state',Provider)
+
